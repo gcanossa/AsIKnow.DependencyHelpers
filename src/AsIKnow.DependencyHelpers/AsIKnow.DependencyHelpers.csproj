@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Company>asiknow.it</Company>
+    <Description>AsIKnow.DependencyHelpers base abstractions</Description>
+    <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
+    <PackageTags>dependency check</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +27,9 @@
       <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.options\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &#xD;&#xA;dotnet pack --no-build --output &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;)" />
+  </Target>
 
 </Project>

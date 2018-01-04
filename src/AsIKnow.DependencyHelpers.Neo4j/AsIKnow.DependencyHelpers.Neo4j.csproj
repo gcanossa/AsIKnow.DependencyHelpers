@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Company>asiknow.it</Company>
+    <Description>Neo4j AsIKnow.DependencyHelpers extensions</Description>
+    <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
+    <PackageTags>dependency check neo4j</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,5 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\AsIKnow.DependencyHelpers\AsIKnow.DependencyHelpers.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &#xD;&#xA;dotnet pack --no-build --output &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;)" />
+  </Target>
 
 </Project>
