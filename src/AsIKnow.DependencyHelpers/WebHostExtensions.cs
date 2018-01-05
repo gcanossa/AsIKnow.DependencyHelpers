@@ -22,7 +22,7 @@ namespace AsIKnow.DependencyHelpers
 
                 DependencyCheckerBuilder tmp = builder(new DependencyCheckerBuilder(services, options.Value));
 
-                var checker = tmp.Build(options.Value, logger);
+                var checker = tmp.Build();
 
                 checker.WaitForDependencies();
 

@@ -27,12 +27,12 @@ namespace AsIKnow.DependencyHelpers.EF
         #region DependencyCheckerBuilder
         public static DependencyCheckerBuilderStage<T> AddEntityFramewrokDbContext<T>(this DependencyCheckerBuilder ext, string name, bool migrate = false) where T : DbContext
         {
-            return new DependencyCheckerBuilderStage<T>(ext, new DbContextDependencyCheck(ext.ServiceProvider.GetRequiredService<T>(), name, TimeSpan.FromSeconds(ext.Options.CheckTimeout), migrate));
+            return new DependencyCheckerBuilderStage<T>(ext, ext.AddDependencyCheck(new DbContextDependencyCheck(ext.ServiceProvider.GetRequiredService<T>(), name, TimeSpan.FromSeconds(ext.Options.CheckTimeout), migrate)));
         }
 
         public static DependencyCheckerBuilderStage<T> AddEntityFramewrokDbContext<T>(this DependencyCheckerBuilder ext, string name, TimeSpan timeBeforeFail, bool migrate = false) where T : DbContext
         {
-            return new DependencyCheckerBuilderStage<T>(ext, new DbContextDependencyCheck(ext.ServiceProvider.GetRequiredService<T>(), name, timeBeforeFail, migrate));
+            return new DependencyCheckerBuilderStage<T>(ext, ext.AddDependencyCheck(new DbContextDependencyCheck(ext.ServiceProvider.GetRequiredService<T>(), name, timeBeforeFail, migrate)));
         }
 
         #endregion

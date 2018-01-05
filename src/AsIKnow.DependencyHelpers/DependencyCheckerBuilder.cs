@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AsIKnow.DependencyHelpers
 {
@@ -10,10 +11,12 @@ namespace AsIKnow.DependencyHelpers
 
         public IServiceProvider ServiceProvider { get; private set; }
         public DependencyCheckerOptions Options { get; private set; }
+        protected ILogger<DependencyChecker> Logger { get; set; }
         public DependencyCheckerBuilder(IServiceProvider provider, DependencyCheckerOptions options)
         {
             ServiceProvider = provider ?? throw new ArgumentNullException(nameof(provider));
             Options = options ?? throw new ArgumentNullException(nameof(options));
+            Logger = ServiceProvider.GetRequiredService<ILogger<DependencyChecker>>();
         }
 
         public IDependencyCheck AddDependencyCheck(IDependencyCheck check)
@@ -24,9 +27,9 @@ namespace AsIKnow.DependencyHelpers
             return check;
         }
 
-        public DependencyChecker Build(DependencyCheckerOptions options, ILogger<DependencyChecker> logger)
+        public DependencyChecker Build()
         {
-            return new DependencyChecker(_checks.Values, options, logger);
+            return new DependencyChecker(_checks.Values, Options, Logger);
         }
     }
 }

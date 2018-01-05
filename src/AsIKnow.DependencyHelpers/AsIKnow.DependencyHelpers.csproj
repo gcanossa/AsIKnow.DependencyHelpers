@@ -7,6 +7,17 @@
     <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
     <PackageTags>dependency check</PackageTags>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.None</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.None</AssemblyFileVersionSettings>
   </PropertyGroup>
 
   <ItemGroup>

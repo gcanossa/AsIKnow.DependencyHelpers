@@ -24,12 +24,12 @@ namespace AsIKnow.DependencyHelpers.Neo4j
         #region DependencyCheckerBuilder
         public static DependencyCheckerBuilderStage<IDriver> AddNeo4jServer(this DependencyCheckerBuilder ext, Uri serverUri, IAuthToken token, string name)
         {
-            return new DependencyCheckerBuilderStage<IDriver>(ext, new Neo4jDependencyCheck(serverUri, token, name, TimeSpan.FromSeconds(ext.Options.CheckTimeout)));
+            return new DependencyCheckerBuilderStage<IDriver>(ext, ext.AddDependencyCheck(new Neo4jDependencyCheck(serverUri, token, name, TimeSpan.FromSeconds(ext.Options.CheckTimeout))));
         }
 
         public static DependencyCheckerBuilderStage<IDriver> AddNeo4jServer<T>(this DependencyCheckerBuilder ext, Uri serverUri, IAuthToken token, string name, TimeSpan timeBeforeFail)
         {
-            return new DependencyCheckerBuilderStage<IDriver>(ext, new Neo4jDependencyCheck(serverUri, token, name, timeBeforeFail));
+            return new DependencyCheckerBuilderStage<IDriver>(ext, ext.AddDependencyCheck(new Neo4jDependencyCheck(serverUri, token, name, timeBeforeFail)));
         }
 
         #endregion
