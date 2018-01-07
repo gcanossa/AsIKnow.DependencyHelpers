@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsIKnow.DependencyHelpers.EF
 {
-    public class DbContextDependencyCheck : IDependencyCheck
+    public class DbContextDependencyCheck : DependencyCheckBase
     {
         public override string ToString()
         {
@@ -16,23 +16,13 @@ namespace AsIKnow.DependencyHelpers.EF
         protected DbContext _ctx;
         protected bool _doMigrations;
         public DbContextDependencyCheck(DbContext ctx, string name, TimeSpan timeBeforeFail, bool doMigrations = false)
+            :base(name, timeBeforeFail)
         {
             _ctx = ctx;
-            Name = name;
-            CheckUntil = DateTimeOffset.Now + timeBeforeFail;
             _doMigrations = doMigrations;
         }
-
-        public DateTimeOffset CheckUntil { get; protected set; }
-        public Func<Task> CustomPostCheckOperation { get; set; }
-        public string Name { get; protected set; }
-
-        public bool Check()
-        {
-            return CheckAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> CheckAsync()
+        
+        public override async Task<bool> CheckAsync()
         {
             try
             {
@@ -49,13 +39,8 @@ namespace AsIKnow.DependencyHelpers.EF
                     _ctx.Database.CloseConnection();
             }
         }
-
-        public void PostCheckOperation()
-        {
-            PostCheckOperationAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        public Task PostCheckOperationAsync()
+        
+        public override Task PostCheckOperationAsync()
         {
             if (_doMigrations)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsIKnow.DependencyHelpers.Redis
 {
-    public class DistributedCacheDependencyChecker : IDependencyCheck
+    public class DistributedCacheDependencyChecker : DependencyCheckBase
     {
         public override string ToString()
         {
@@ -14,22 +14,12 @@ namespace AsIKnow.DependencyHelpers.Redis
         }
         protected IDistributedCache _ctx;
         public DistributedCacheDependencyChecker(IDistributedCache ctx, string name, TimeSpan timeBeforeFail)
+            :base(name, timeBeforeFail)
         {
             _ctx = ctx;
-            Name = name;
-            CheckUntil = DateTimeOffset.Now + timeBeforeFail;
         }
-
-        public DateTimeOffset CheckUntil { get; protected set; }
-        public Func<Task> CustomPostCheckOperation { get; set; }
-        public string Name { get; protected set; }
-
-        public bool Check()
-        {
-            return CheckAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> CheckAsync()
+        
+        public override async Task<bool> CheckAsync()
         {
             try
             {
@@ -41,16 +31,6 @@ namespace AsIKnow.DependencyHelpers.Redis
             {
                 return false;
             }
-        }
-
-        public void PostCheckOperation()
-        {
-            
-        }
-
-        public Task PostCheckOperationAsync()
-        {
-            return Task.CompletedTask;
         }
     }
 }

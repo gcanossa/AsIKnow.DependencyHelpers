@@ -18,8 +18,8 @@ namespace AsIKnow.DependencyHelpers
             Options = options ?? throw new ArgumentNullException(nameof(options));
             Logger = ServiceProvider.GetRequiredService<ILogger<DependencyChecker>>();
         }
-
-        public IDependencyCheck AddDependencyCheck(IDependencyCheck check)
+        
+        public T AddDependencyCheck<T>(T check) where T : IDependencyCheck
         {
             if (check == null)
                 throw new ArgumentNullException(nameof(check));

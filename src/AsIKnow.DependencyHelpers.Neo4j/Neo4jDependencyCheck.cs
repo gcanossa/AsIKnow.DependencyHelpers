@@ -6,7 +6,7 @@ using Neo4j.Driver.V1;
 
 namespace AsIKnow.DependencyHelpers.Neo4j
 {
-    public class Neo4jDependencyCheck : IDependencyCheck
+    public class Neo4jDependencyCheck : DependencyCheckBase
     {
         public override string ToString()
         {
@@ -17,24 +17,13 @@ namespace AsIKnow.DependencyHelpers.Neo4j
         protected IAuthToken _token;
 
         public Neo4jDependencyCheck(Uri uri, IAuthToken token, string name, TimeSpan timeBeforeFail)
+            :base(name, timeBeforeFail)
         {
             _uri = uri;
             _token = token;
-
-            Name = name;
-            CheckUntil = DateTimeOffset.Now + timeBeforeFail;
         }
-
-        public DateTimeOffset CheckUntil { get; protected set; }
-        public Func<Task> CustomPostCheckOperation { get; set; }
-        public string Name { get; protected set; }
-
-        public bool Check()
-        {
-            return CheckAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> CheckAsync()
+        
+        public override async Task<bool> CheckAsync()
         {
             try
             {
@@ -49,16 +38,6 @@ namespace AsIKnow.DependencyHelpers.Neo4j
             {
                 return false;
             }
-        }
-
-        public void PostCheckOperation()
-        {
-
-        }
-
-        public Task PostCheckOperationAsync()
-        {
-            return Task.CompletedTask;
         }
     }
 }
