@@ -34,9 +34,10 @@ It can also be used on a _IWebHost_ instance, to simplify aspent core applicatio
             BuildWebHost(args)
                 .CheckDependencies(builder => builder
                         .AddEntityFramewrokDbContext<ApplicationDbContext>("database",true)
-                            .WithoutEntityFrameworkPostCheckOperation()
+                            .WithoutPostCheckOperation()
                         .AddDistributedCache<RedisCache>("cache")
                     )
+                .AddEnvironmentOperations<InitialDataSeeder>()
                 .Run();
         }
 
@@ -47,3 +48,5 @@ It can also be used on a _IWebHost_ instance, to simplify aspent core applicatio
                 .Build();
     }
 </pre>
+
+In the above example _InitialDataSeeder_ is a class with a set of optional _Configure*_ methods with the same pre and post condition of the _Startup_ class.
