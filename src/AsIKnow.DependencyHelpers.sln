@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsIKnow.DependencyHelpers", "AsIKnow.DependencyHelpers\AsIKnow.DependencyHelpers.csproj", "{EF21F5B6-809A-4278-8F50-53A0B728206E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsIKnow.DependencyHelpers.EF", "AsIKnow.DependencyHelpers.EF\AsIKnow.DependencyHelpers.EF.csproj", "{21583509-3166-4429-8368-C4936EEA065C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsIKnow.DependencyHelpers.EF", "AsIKnow.DependencyHelpers.EF\AsIKnow.DependencyHelpers.EF.csproj", "{21583509-3166-4429-8368-C4936EEA065C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsIKnow.DependencyHelpers.Redis", "AsIKnow.DependencyHelpers.Redis\AsIKnow.DependencyHelpers.Redis.csproj", "{21935220-F6FD-40D3-83E8-D5DCB6F65887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsIKnow.DependencyHelpers.Redis", "AsIKnow.DependencyHelpers.Redis\AsIKnow.DependencyHelpers.Redis.csproj", "{21935220-F6FD-40D3-83E8-D5DCB6F65887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsIKnow.DependencyHelpers.Neo4j", "AsIKnow.DependencyHelpers.Neo4j\AsIKnow.DependencyHelpers.Neo4j.csproj", "{3C8FF7DD-4287-4A16-838F-42582E4C6EE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsIKnow.DependencyHelpers.Neo4j", "AsIKnow.DependencyHelpers.Neo4j\AsIKnow.DependencyHelpers.Neo4j.csproj", "{3C8FF7DD-4287-4A16-838F-42582E4C6EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "..\test\UnitTest\UnitTest.csproj", "{F8072C20-8A76-412B-8891-1893C172356C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3C8FF7DD-4287-4A16-838F-42582E4C6EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8FF7DD-4287-4A16-838F-42582E4C6EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C8FF7DD-4287-4A16-838F-42582E4C6EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8072C20-8A76-412B-8891-1893C172356C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8072C20-8A76-412B-8891-1893C172356C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8072C20-8A76-412B-8891-1893C172356C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8072C20-8A76-412B-8891-1893C172356C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
