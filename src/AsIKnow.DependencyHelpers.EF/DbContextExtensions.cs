@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AsIKnow.DependencyHelpers.EF
 {
-    public static class SeedUtils
+    public static class DbContextExtensions
     {
         public static Expression<Func<T, bool>> GetCompareExpression<T>(T obj, Expression<Func<T, object>> excludedProperties = null, bool excludeCollections = true)
         {
