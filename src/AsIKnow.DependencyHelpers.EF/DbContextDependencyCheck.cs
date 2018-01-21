@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,7 +45,10 @@ namespace AsIKnow.DependencyHelpers.EF
         {
             if (_doMigrations)
             {
-                return _ctx.Database.MigrateAsync();
+                using (IDbContextTransaction tx = _ctx.Database.BeginTransaction())
+                {
+                    return _ctx.Database.MigrateAsync();
+                }
             }
             else
                 return Task.CompletedTask;

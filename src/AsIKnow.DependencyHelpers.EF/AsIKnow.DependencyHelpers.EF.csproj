@@ -7,7 +7,7 @@
     <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
     <PackageTags>dependency check entityframework</PackageTags>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;cd &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;del /F $(ProjectName).*&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &#xD;&#xA;dotnet pack --no-build --output &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;)" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;cd &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;del /F $(ProjectName).*&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &#xD;&#xA;dotnet pack --output &quot;$(SolutionDir)..\build&quot;&#xD;&#xA;)" />
   </Target>
 
 </Project>
