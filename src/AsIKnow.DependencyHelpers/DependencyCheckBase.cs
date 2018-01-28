@@ -22,21 +22,13 @@ namespace AsIKnow.DependencyHelpers
         public Func<Task> CustomPostCheckOperation { get; set; }
         public string Name { get; protected set; }
 
+        public IEnumerable<Exception> FailureReport { get; protected set; }
+
         public virtual bool Check()
         {
             return CheckAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public abstract Task<bool> CheckAsync();
-
-        public void PostCheckOperation()
-        {
-            PostCheckOperationAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        public virtual Task PostCheckOperationAsync()
-        {
-            return Task.CompletedTask;
-        }
     }
 }

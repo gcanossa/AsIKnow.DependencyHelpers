@@ -12,7 +12,6 @@ namespace AsIKnow.DependencyHelpers
         Func<Task> CustomPostCheckOperation { get; set; }
         bool Check();
         Task<bool> CheckAsync();
-        void PostCheckOperation();
-        Task PostCheckOperationAsync();
+        IEnumerable<Exception> FailureReport { get; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsIKnow.DependencyHelpers
 {
-    public class UnavailableDependencyException : Exception
+    public class UnavailableDependencyException : AggregateException
     {
         public UnavailableDependencyException()
             :base()
@@ -13,8 +13,8 @@ namespace AsIKnow.DependencyHelpers
         public UnavailableDependencyException(string message)
             : base(message)
         { }
-        public UnavailableDependencyException(string message, Exception innerException)
-            : base(message, innerException)
+        public UnavailableDependencyException(string message, IEnumerable<Exception> innerExceptions)
+            : base(message, innerExceptions)
         { }
         public UnavailableDependencyException(SerializationInfo info, StreamingContext ctx)
             :base(info, ctx)

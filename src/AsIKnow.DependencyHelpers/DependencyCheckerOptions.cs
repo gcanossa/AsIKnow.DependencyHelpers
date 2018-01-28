@@ -14,5 +14,18 @@ namespace AsIKnow.DependencyHelpers
         /// Check timeout in seconds
         /// </summary>
         public uint CheckTimeout { get; set; } = 60;
+
+        /// <summary>
+        /// Parameters for specific checks, matching checks names
+        /// </summary>
+        public Dictionary<string, Dictionary<string,string>> CheckParameters { get; set; } = new Dictionary<string, Dictionary<string, string>>();
+
+        public T GetCheckParameter<T>(string key) where T : DependencyCheckParameterBase
+        {
+            if (!CheckParameters.ContainsKey(key))
+                return null;
+            else
+                return (T)Activator.CreateInstance(typeof(T), new object[] { CheckParameters[key] });
+        }
     }
 }

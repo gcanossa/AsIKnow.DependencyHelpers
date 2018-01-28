@@ -38,7 +38,7 @@ namespace AsIKnow.DependencyHelpers
                         if (item.CheckUntil < DateTimeOffset.Now)
                         {
                             _logger.LogCritical($"Checker \"{item.Name}\" failed. Out of time.");
-                            throw new UnavailableDependencyException($"{item.Name}: {item.GetType().FullName}");
+                            throw new UnavailableDependencyException($"{item.Name}: {item.GetType().FullName}", item.FailureReport??new List<Exception>());
                         }
                         else
                         {
@@ -59,12 +59,10 @@ namespace AsIKnow.DependencyHelpers
                 throw new AggregateException(_tmp.Where(p=>p.IsFaulted).Select(p=>p.Exception.InnerException).ToArray());
             }
 
-            foreach (IDependencyCheck item in _checks)
+            foreach (IDependencyCheck item in _checks.Where(p=>p.CustomPostCheckOperation != null))
             {
                 _logger.LogInformation($"Performing post check operation for \"{item.Name}\"");
-                await item.PostCheckOperationAsync();
-                if(item.CustomPostCheckOperation != null)
-                    await item.CustomPostCheckOperation();
+                await item.CustomPostCheckOperation();
             }
         }
     }

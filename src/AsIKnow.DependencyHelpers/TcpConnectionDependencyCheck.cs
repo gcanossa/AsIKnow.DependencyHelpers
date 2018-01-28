@@ -26,6 +26,9 @@ namespace AsIKnow.DependencyHelpers
             }
             catch(Exception e)
             {
+                List<Exception> report = FailureReport as List<Exception> ?? new List<Exception>();
+                report.Add(e);
+
                 return false;
             }
             finally

@@ -36,6 +36,9 @@ namespace AsIKnow.DependencyHelpers.Neo4j
             }
             catch (Exception e)
             {
+                List<Exception> report = FailureReport as List<Exception> ?? new List<Exception>();
+                report.Add(e);
+
                 return false;
             }
         }

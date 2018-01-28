@@ -16,11 +16,11 @@ namespace AsIKnow.DependencyHelpers.EF
 
         protected DbContext _ctx;
         protected bool _doMigrations;
-        public DbContextDependencyCheck(DbContext ctx, string name, TimeSpan timeBeforeFail, bool doMigrations = false)
+        public DbContextDependencyCheck(DbContext ctx, string name, TimeSpan timeBeforeFail, EFDependencyCheckOptions options)
             :base(name, timeBeforeFail)
         {
             _ctx = ctx;
-            _doMigrations = doMigrations;
+            _doMigrations = options.Migrate;
         }
         
         public override async Task<bool> CheckAsync()
@@ -28,10 +28,19 @@ namespace AsIKnow.DependencyHelpers.EF
             try
             {
                 await _ctx.Database.OpenConnectionAsync();
+
+                if (_doMigrations)
+                {
+                    await _ctx.Database.MigrateAsync();
+                }
+
                 return true;
             }
             catch (Exception e)
             {
+                List<Exception> report = FailureReport as List<Exception> ?? new List<Exception>();
+                report.Add(e);
+
                 return false;
             }
             finally
@@ -39,19 +48,6 @@ namespace AsIKnow.DependencyHelpers.EF
                 if (_ctx.Database.GetDbConnection() != null)
                     _ctx.Database.CloseConnection();
             }
-        }
-        
-        public override Task PostCheckOperationAsync()
-        {
-            if (_doMigrations)
-            {
-                using (IDbContextTransaction tx = _ctx.Database.BeginTransaction())
-                {
-                    return _ctx.Database.MigrateAsync();
-                }
-            }
-            else
-                return Task.CompletedTask;
         }
     }
 }

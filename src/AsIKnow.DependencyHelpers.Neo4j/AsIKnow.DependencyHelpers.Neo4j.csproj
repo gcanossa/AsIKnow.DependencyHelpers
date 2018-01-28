@@ -7,7 +7,9 @@
     <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
     <PackageTags>dependency check neo4j</PackageTags>
-    <Version>0.1.6</Version>
+    <Version>0.1.10</Version>
+    <FileVersion>0.1.10.0</FileVersion>
+    <AssemblyVersion>0.1.10.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
