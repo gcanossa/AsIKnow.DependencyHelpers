@@ -10,24 +10,23 @@ namespace AsIKnow.DependencyHelpers.Neo4j
     {
         public override string ToString()
         {
-            return $"{GetType().FullName}:{_uri}:{Name}";
+            return $"{GetType().FullName}:{_builder.Uri}:{Name}";
         }
 
-        protected Uri _uri;
-        protected IAuthToken _token;
+        protected DriverBuilder _builder;
 
-        public Neo4jDependencyCheck(Uri uri, IAuthToken token, string name, TimeSpan timeBeforeFail)
+        public Neo4jDependencyCheck(DriverBuilder builder, string name, TimeSpan timeBeforeFail)
             :base(name, timeBeforeFail)
         {
-            _uri = uri;
-            _token = token;
+            _builder = builder;
+            _builder.Config.ConnectionAcquisitionTimeout = CheckUntil - DateTimeOffset.Now;
         }
         
         public override async Task<bool> CheckAsync()
         {
             try
             {
-                using (IDriver driver = GraphDatabase.Driver(_uri, _token, new Config() { ConnectionAcquisitionTimeout = CheckUntil - DateTimeOffset.Now }))
+                using (IDriver driver = _builder.GetDriver())
                 using (ISession s = driver.Session())
                 {
                     await s.RunAsync("MATCH (p) RETURN id(p) limit 0");
