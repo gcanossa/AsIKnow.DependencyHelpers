@@ -29,7 +29,7 @@ namespace AsIKnow.DependencyHelpers.Neo4j
                 using (IDriver driver = _builder.GetDriver())
                 using (ISession s = driver.Session())
                 {
-                    await s.RunAsync("MATCH (p) RETURN id(p) limit 0");
+                    await s.RunAsync("MATCH (p) RETURN id(p) LIMIT 0");
                 }
                 return true;
             }
