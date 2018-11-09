@@ -1,20 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Version>0.1</Version>
+    <Description>Mongodb AsIKnow.DependencyHelpers extensions</Description>
     <Company>asiknow.it</Company>
-    <Description>Neo4j AsIKnow.DependencyHelpers extensions</Description>
     <PackageLicenseUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/goldenass/AsIKnow.DependencyHelpers</PackageProjectUrl>
-    <PackageTags>dependency check neo4j</PackageTags>
-    <Version>0.2</Version>
-    <FileVersion>0.2.0.0</FileVersion>
-    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <PackageTags>dependency check mongodb</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="N4pper" Version="0.1.14" />
-    <PackageReference Include="Neo4j.Driver" Version="1.7.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.7.1" />
   </ItemGroup>
 
   <ItemGroup>

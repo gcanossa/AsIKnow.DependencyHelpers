@@ -12,7 +12,7 @@ namespace AsIKnow.DependencyHelpers.Redis
         {
             IDistributedCache cache = ext.ServiceProvider.GetRequiredService<IDistributedCache>();
             if (cache is T == false)
-                throw new InvalidOperationException($"Check caanot be applied for cache of type \"{cache.GetType().FullName}\". Expected {typeof(T).FullName}");
+                throw new InvalidOperationException($"Check cannot be applied for cache of type \"{cache.GetType().FullName}\". Expected {typeof(T).FullName}");
 
             return new DependencyCheckerBuilderStage<DistributedCacheDependencyChecker>(ext, ext.AddDependencyCheck(new DistributedCacheDependencyChecker(cache, name, TimeSpan.FromSeconds(ext.Options.CheckTimeout))));
         }

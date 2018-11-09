@@ -35,7 +35,7 @@ namespace AsIKnow.DependencyHelpers
                     _logger.LogInformation($"Checking \"{item.Name}\"");
                     while (!await item.CheckAsync())
                     {
-                        if (item.CheckUntil < DateTimeOffset.Now)
+                        if (item.CheckUntil < DateTimeOffset.UtcNow)
                         {
                             _logger.LogCritical($"Checker \"{item.Name}\" failed. Out of time.");
                             throw new UnavailableDependencyException($"{item.Name}: {item.GetType().FullName}", item.FailureReport??new List<Exception>());
