@@ -15,9 +15,9 @@ namespace AsIKnow.DependencyHelpers.Mongodb
             : base(obj)
         {
             obj = obj ?? throw new ArgumentNullException(nameof(obj));
-            if (obj.ContainsKey(nameof(Uri)))
-                Uri = obj[nameof(Uri)];
+            if (obj.ContainsKey(nameof(ConnectionStringName)))
+                ConnectionStringName = obj[nameof(ConnectionStringName)];
         }
-        public string Uri { get; set; }
+        public string ConnectionStringName { get; set; }
     }
 }

@@ -61,7 +61,7 @@ namespace UnitTest
             RabbitMqDependencyCheckOptions opt1 = result.GetCheckParameter<RabbitMqDependencyCheckOptions>("rabbit");
             
             var check = new RabbitMqDependencyChecker(
-                    new ConnectionFactory() { Uri = new Uri(opt1.Uri) }, "test", TimeSpan.FromSeconds(10));
+                    new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString(opt1.ConnectionStringName)) }, "test", TimeSpan.FromSeconds(10));
 
             Assert.False(check.Check());
         }
@@ -86,7 +86,7 @@ namespace UnitTest
             DependencyCheckerOptions result = options.Value;
             MongoDependencyCheckOptions opt2 = result.GetCheckParameter<MongoDependencyCheckOptions>("mongo");
             
-            var mongoUrl = new MongoUrl(opt2.Uri);
+            var mongoUrl = new MongoUrl(Configuration.GetConnectionString(opt2.ConnectionStringName));
             var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
 
             var check = new MongoDependencyChecker(

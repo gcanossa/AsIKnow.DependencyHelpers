@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 using System;
 
 namespace AsIKnow.DependencyHelpers.Mongodb
@@ -14,8 +16,9 @@ namespace AsIKnow.DependencyHelpers.Mongodb
         public static DependencyCheckerBuilderStage<MongoDependencyChecker> AddMongodb(this DependencyCheckerBuilder ext, string name, TimeSpan timeBeforeFail)
         {
             var options = ext.Options.GetCheckParameter<MongoDependencyCheckOptions>(name) ?? new MongoDependencyCheckOptions();
-            
-            var mongoUrl = new MongoUrl(options.Uri);
+
+            var url = ext.ServiceProvider.GetRequiredService<IConfiguration>().GetConnectionString(options.ConnectionStringName);
+            var mongoUrl = new MongoUrl(url);
             var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
 
             return new DependencyCheckerBuilderStage<MongoDependencyChecker>(ext,
